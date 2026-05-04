@@ -14,8 +14,8 @@ import pickle
 ## threshold = pickle.load(open("threshold.pkl", "rb"))
 
 
-model = pickle.load(open("model/loan_model.pkl", "rb"))
-threshold = pickle.load(open("model/threshold.pkl", "rb"))
+model = pickle.load(open("loan_model.pkl", "rb"))
+threshold = pickle.load(open("threshold.pkl", "rb"))
 
 #%%
 # ================================
@@ -44,6 +44,7 @@ issue_month = st.number_input("Issue Month", min_value=1, max_value=12, value=6)
 # ================================
 income_loan_ratio = annual_income / loan_amount if loan_amount != 0 else 0
 interest_burden = installment / annual_income if annual_income != 0 else 0
+loan_to_income = loan_amount / annual_income if annual_income != 0 else 0
 
 #%%
 # ================================
@@ -59,7 +60,8 @@ input_data = pd.DataFrame([[
     issue_year,
     issue_month,
     income_loan_ratio,
-    interest_burden
+    interest_burden,
+    loan_to_income
 ]], columns=[
     'annual_income',
     'loan_amount',
@@ -70,7 +72,8 @@ input_data = pd.DataFrame([[
     'issue_year',
     'issue_month',
     'income_loan_ratio',
-    'interest_burden'
+    'interest_burden',
+    'loan_to_income'
 ])
 
 #%%
